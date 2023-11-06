@@ -14,10 +14,8 @@
      rusza mój pionek 
      karta wpada do stosiku i stosik jest tasowany
 """
-
-
-from hedgehog import Hedgehog
 from cards import Deck
+from board import Board
 
 deck = Deck()
 
@@ -31,3 +29,8 @@ for key, value in result.items():
 
 players, pile = deck.deal_cards()
 print(f'Pile: {pile}')
+
+# 'yellow', 'purple', 'blue', 'red', 'green'
+
+board = Board()
+board.board_moving()
