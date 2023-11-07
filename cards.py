@@ -1,9 +1,8 @@
 import random
-from hedgehog import Hedgehog
 
 
 class Deck:
-    def __init__(self):
+    def __init__(self, player_info):
         self.cards = [
             'yellow ++', 'red ++', 'green ++', 'blue ++', 'purple ++',
             'yellow ++', 'red ++', 'green ++', 'blue ++', 'purple ++',
@@ -28,8 +27,9 @@ class Deck:
             'multi +', 'multi +', 'multi +', 'multi +', 'multi +',
             'multi +', 'multi +', 'multi +', 'multi +', 'multi +',
             'multi -', 'multi -',
-            'multi -', 'multi -',
+            'multi -', 'multi -'
         ]
+        self.player_info = player_info
 
     def shuffle(self):
         random.shuffle(self.cards)
@@ -52,13 +52,22 @@ class Deck:
         return players, pile
 
     def map_players_colors(self):
-        class_A_result = Hedgehog().display_players()
+        class_A_result = self.player_info
         mapped_result = {}
 
         for i, player_hand in enumerate(self.deal_cards()[0], 1):
             player_name = list(class_A_result.values())[i - 1]
             color = list(class_A_result.keys())[i - 1]
-            mapped_result[f"{player_name}'s hand"] = player_hand
             mapped_result[f"{player_name}'s color"] = color
+            mapped_result[f"{player_name}'s hand"] = player_hand
+
+        for key, value in mapped_result.items():
+            if "'s hand" in key:
+                print(f"{key}: {', '.join(value)}")
+            else:
+                print(f"{key}: {value}")
+
+        players, pile = self.deal_cards()
+        print(f'Pile: {pile}')
 
         return mapped_result

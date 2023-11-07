@@ -1,15 +1,16 @@
-from hedgehog import Hedgehog
+from menu import Menu
 
 
 class Board:
-    def __init__(self):
+    def __init__(self, player_info):
         self.board_size = 10
+        self.player_info = player_info
 
     def board_moving(self):
-        players = Hedgehog().display_players()
+        players = self.player_info
         player_values = {player: 1 for player in players.keys()}
 
-# 'yellow', 'purple', 'blue', 'red', 'green'
+        print(player_values)
 
         while True:
 
@@ -18,10 +19,16 @@ class Board:
             if card == 'multi ++':
                 color = input("What color? ")
                 player_values[color] += 2
+                if player_values[color] >= 10:
+                    print(f"Player {color} Win!")
+                    break
 
             elif card == 'multi +':
                 color = input("What color? ")
                 player_values[color] += 1
+                if player_values[color] >= 10:
+                    print(f"Player {color} Win!")
+                    break
 
             elif card == 'multi --':
                 color = input("What color? ")
@@ -39,17 +46,29 @@ class Board:
                 if player_values:
                     min_color = min(player_values, key=player_values.get)
                     player_values[min_color] += 2
+                    if player_values[min_color] >= 10:
+                        print(f"Player {min_color} Win!")
+                        break
 
             elif card == 'multi >':
                 if player_values:
                     min_color = min(player_values, key=player_values.get)
                     player_values[min_color] += 1
+                    if player_values[min_color] >= 10:
+                        print(f"Player {min_color} Win!")
+                        break
 
             elif card[-2:] == '++':
                 player_values[card[:-3]] += 2
+                if player_values[card[:-3]] >= 10:
+                    print(f"Player {card[:-3]} Win!")
+                    break
 
             elif card[-1:] == '+':
                 player_values[card[:-2]] += 1
+                if player_values[card[:-2]] >= 10:
+                    print(f"Player {card[:-2]} Win!")
+                    break
 
             elif card[-2:] == '--':
                 player_values[card[:-3]] -= 2
@@ -66,7 +85,3 @@ class Board:
                 break
 
             print(player_values)
-
-
-board = Board()
-board.board_moving()
