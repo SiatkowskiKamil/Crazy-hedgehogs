@@ -53,7 +53,7 @@ class Deck:
 
     def map_players_colors(self):
         class_A_result = self.player_info
-        mapped_result = {}
+        mapped_result = {} 
 
         for i, player_hand in enumerate(self.deal_cards()[0], 1):
             player_name = list(class_A_result.values())[i - 1]

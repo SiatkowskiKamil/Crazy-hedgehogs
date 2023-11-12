@@ -3,10 +3,16 @@
      rusza mój pionek 
      karta wpada do stosiku i stosik jest tasowany
 """
-
+from userManager import UserLoginClass
 from board import Board
 from cards import Deck
 from menu import Menu
+
+username_input = input("Enter your name: ")
+password_input = input("Enter your password: ")
+
+user_login = UserLoginClass().login(username_input, password_input)
+print(user_login)
 
 menu = Menu()
 how_many_players_in_this_game_result = menu.how_many_players_in_this_game()
