@@ -1,6 +1,3 @@
-from menu import Menu
-
-
 class Board:
     def __init__(self, player_info):
         self.board_size = 10
